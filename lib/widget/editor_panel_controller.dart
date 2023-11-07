@@ -86,7 +86,7 @@ class EditorPanelController {
   MoveStuff moveStuff = MoveStuff.non;
 
   ///trash can position
-  Offset trashCanPosition = Offset(111, (20 + (PlatformDispatcher.instance.implicitView?.padding.bottom ?? 0)));
+  Offset trashCanPosition = Offset(111, (0 /*+ (PlatformDispatcher.instance.implicitView?.padding.bottom ?? 0)*/));
 
   ///trash can size.
   final Size tcSize = Size(153, 77);
@@ -168,7 +168,7 @@ class EditorPanelController {
         width: target.floatSize?.width??1,
         height: target.floatSize?.height??1);
     final Rect tcR = Rect.fromLTWH(
-        screenSize!.width - trashCanPosition.dx,
+        (screenSize!.width - trashCanPosition.dx)/2,
         screenSize!.height - trashCanPosition.dy - tcSize.height,
         tcSize.width,
         tcSize.height);

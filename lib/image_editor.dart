@@ -133,29 +133,34 @@ class ImageEditorState extends State<ImageEditor>
   Widget build(BuildContext context) {
     _panelController.screenSize ??= windowSize;
 
-    final appBar = ValueListenableBuilder<bool>(
-        valueListenable: _panelController.showAppBar,
-        builder: (ctx, value, child) {
-          return AnimatedPositioned(
-              top: value ? 0 : -headerHeight,
-              left: 0, right: 0,
-              child: ValueListenableBuilder<bool>(
-                  valueListenable: _panelController.takeShot,
-                  builder: (ctx, value, child) {
-                    return Opacity(
-                      opacity: value ? 0 : 1,
-                      child: AppBar(
-                        iconTheme: IconThemeData(color: Colors.white, size: 16),
-                        leading: backWidget(),
-                        backgroundColor: Colors.transparent,
-                        actions: [
-                          resetWidget(onTap: resetCanvasPlate)
-                        ],
-                      ),
-                    );
-                  }),
-              duration: _panelController.panelDuration);
-        });
+    // final appBar = ValueListenableBuilder<bool>(
+    //     valueListenable: _panelController.showAppBar,
+    //     builder: (ctx, value, child) {
+    //       return AnimatedPositioned(
+    //           top: value ? 0 : -headerHeight,
+    //           left: 0, right: 0,
+    //           child: ValueListenableBuilder<bool>(
+    //               valueListenable: _panelController.takeShot,
+    //               builder: (ctx, value, child) {
+    //                 return Opacity(
+    //                   opacity: value ? 0 : 1,
+    //                   child: AppBar(
+    //                     iconTheme: IconThemeData(color: Colors.white, size: 16),
+    //                     leading: backWidget(),
+    //                     backgroundColor: Colors.transparent,
+    //                     actions: [
+    //                       resetWidget(onTap: resetCanvasPlate)
+    //                     ],
+    //                   ),
+    //                 );
+    //               }),
+    //           duration: _panelController.panelDuration);
+    //     });
+    final appBar = AppBar(
+      iconTheme: IconThemeData(color: Colors.white, size: 16),
+      leading: backWidget(),
+      backgroundColor: Colors.transparent,
+    );
 
     final paintCanvas = Positioned.fromRect(
         rect: Rect.fromLTWH(0, headerHeight, screenWidth, canvasHeight),
@@ -203,15 +208,17 @@ class ImageEditorState extends State<ImageEditor>
         valueListenable: _panelController.showTrashCan,
         builder: (ctx, value, child) {
           return AnimatedPositioned(
-              bottom: value ? _panelController.trashCanPosition.dy : -headerHeight,
+              bottom: value ? _panelController.trashCanPosition.dy : -(headerHeight*5),
               left: _panelController.trashCanPosition.dx,
               child: _buildTrashCan(),
               duration: _panelController.panelDuration);
         });
 
-    return Material(
-      color: Colors.black,
-      child: Listener(
+    return Scaffold(
+      appBar: appBar,
+      extendBodyBehindAppBar: true,
+      backgroundColor: Colors.black,
+      body: Listener(
         onPointerMove: (v) {
           _panelController.pointerMoving(v);
         },
@@ -219,7 +226,7 @@ class ImageEditorState extends State<ImageEditor>
           controller: screenshotController,
           child: Stack(
             children: [
-              appBar,
+              // appBar,
               //canvas
               paintCanvas,
               bottomOpBar,
@@ -336,6 +343,10 @@ class ImageEditorState extends State<ImageEditor>
   Widget _buildButton(OperateType type, String txt, {VoidCallback? onPressed}) {
     return GestureDetector(
       onTap: () {
+        if(type == OperateType.flip || type == OperateType.rotated) {
+          onPressed?.call();
+          return;
+        }
         if(type == _panelController.currentOperateType) {
           _panelController.cancelOperateType();
         } else {
@@ -684,9 +695,9 @@ mixin WindowUiBinding<T extends StatefulWidget> on State<T> {
 
   Size get windowSize => MediaQuery.of(context).size;
 
-  double get windowStatusBarHeight => View.of(context).padding.top;
+  double get windowStatusBarHeight => MediaQuery.of(context).padding.top;
 
-  double get windowBottomBarHeight => View.of(context).padding.bottom;
+  double get windowBottomBarHeight => MediaQuery.of(context).padding.bottom;
 
   double get screenWidth => windowSize.width;
 
