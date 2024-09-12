@@ -286,13 +286,13 @@ class ImageEditorState extends State<ImageEditor>
                   switchPainterMode(DrawStyle.normal);
                 }),
                 controlBtnSpacing,
-                _buildButton(OperateType.text, 'Text', onPressed: toTextEditorPage),
+                _buildButton(OperateType.text, 'text'.tr, onPressed: toTextEditorPage),
                 controlBtnSpacing,
-                _buildButton(OperateType.flip, 'Flip', onPressed: flipCanvas),
+                _buildButton(OperateType.flip, 'flip'.tr, onPressed: flipCanvas),
                 controlBtnSpacing,
-                _buildButton(OperateType.rotated, 'Rotate', onPressed: rotateCanvasPlate),
+                _buildButton(OperateType.rotated, 'rotate'.tr, onPressed: rotateCanvasPlate),
                 controlBtnSpacing,
-                _buildButton(OperateType.mosaic, 'Mosaic', onPressed: () {
+                _buildButton(OperateType.mosaic, 'mosaic'.tr, onPressed: () {
                   switchPainterMode(DrawStyle.mosaic);
                 }),
                 Expanded(child: SizedBox()),
@@ -333,7 +333,7 @@ class ImageEditorState extends State<ImageEditor>
                 12.vGap,
                 Icon(Icons.delete_outline, size: 32, color: Colors.white,),
                 4.vGap,
-                Text(isActive ? 'move here for delete' : 'release to delete',
+                Text(isActive ? 'move here for delete'.tr : 'release to delete'.tr,
                   style: TextStyle(color: Colors.white, fontSize: 12),)
               ],
             ),

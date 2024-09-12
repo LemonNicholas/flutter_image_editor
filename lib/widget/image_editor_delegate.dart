@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_editor_dove/flutter_image_editor.dart';
 import 'package:image_editor_dove/widget/float_text_widget.dart';
 import 'package:image_editor_dove/widget/text_editor_page.dart';
@@ -64,7 +65,7 @@ class DefaultImageEditorDelegate extends ImageEditorDelegate{
           borderRadius: BorderRadius.all(Radius.circular(6)),
           gradient: const LinearGradient(colors: [Colors.green, Colors.greenAccent])),
       child: Text(
-        'Done',
+        'done'.tr,
         style: TextStyle(fontSize: 15, color: Colors.white),
       ),
     );
@@ -96,7 +97,7 @@ class DefaultImageEditorDelegate extends ImageEditorDelegate{
   }
 
   @override
-  Widget get resetWidget => Text('Reset', style: TextStyle(color: Colors.white, fontSize: 16));
+  Widget get resetWidget => Text('reset'.tr, style: TextStyle(color: Colors.white, fontSize: 16));
 
   @override
   SliderThemeData sliderThemeData(BuildContext context) => SliderTheme.of(context).copyWith(
@@ -119,15 +120,15 @@ class DefaultImageEditorDelegate extends ImageEditorDelegate{
 
   @override
   Widget get boldTagWidget => Text(
-    'Bold',
+    'bold'.tr,
     style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold),
   );
 
   @override
-  Widget get sliderLeftWidget => _txtFlatWidget('small');
+  Widget get sliderLeftWidget => _txtFlatWidget('small'.tr);
 
   @override
-  Widget get sliderRightWidget => _txtFlatWidget('big');
+  Widget get sliderRightWidget => _txtFlatWidget('big'.tr);
 
   Widget _txtFlatWidget(String txt) {
     return Text(
