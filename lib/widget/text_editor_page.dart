@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_editor_dove/extension/num_extension.dart';
 import 'package:image_editor_dove/model/float_text_model.dart';
 
@@ -110,7 +111,7 @@ class TextEditorPageState extends State<TextEditorPage> with LittleWidgetBinding
                     height: 44,
                     alignment: Alignment.center,
                     padding: EdgeInsets.only(top: 12, bottom: 12),
-                    child: Text('Cancel', style: TextStyle(color: Colors.white, fontSize: 16),),
+                    child: Text('cancel'.tr, style: TextStyle(color: Colors.white, fontSize: 16),),
                   ),
                 ),
                 actions: [
