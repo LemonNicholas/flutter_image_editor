@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'dart:ui' as ui;
 
@@ -281,7 +282,7 @@ class ImageEditorState extends State<ImageEditor>
           Expanded(
             child: Row(
               children: [
-                _buildButton(OperateType.brush, 'Draw', onPressed: () {
+                _buildButton(OperateType.brush, 'draw'.tr, onPressed: () {
                   switchPainterMode(DrawStyle.normal);
                 }),
                 controlBtnSpacing,
